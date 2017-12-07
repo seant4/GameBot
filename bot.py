@@ -42,203 +42,29 @@ async def on_message(message):
 
 #---------------------------------------------------------------------------------------------------------------                
     if message.content.startswith('~fake'):
-        await client.send_message(message.channel, 'How many players? (up to 5)')
+            await client.send_message(message.channel, 'How many players? ')
 
-        def players_check(m):
-            return m.content.isdigit()
+            
+            a = await client.wait_for_message(timeout=10.0, author=message.author, )
+            await client.send_message(message.channel, 'success' )
+            a = int(a.content)
+            await client.send_message(message.channel, 'Mention all of the players in individual messages: ')
+            chosen_player_index = random.randint(0, a-1)
+            names = []
+            for count in range(a):
+                names.append(await client.wait_for_message(timeout=10.0, author=message.author))
 
-        players = await client.wait_for_message(timeout=10.0, author=message.author, check=players_check)
-        await client.send_message(message.channel, players.content, )
-        number = int(players.content)
-
-        if number == 1:
-            await client.send_message(message.channel, 'more than 1 player')
-
-        elif number == 2:
-            await client.send_message(message.channel, 'Who will be player 1?')
-            player1 = await client.wait_for_message(timeout=20.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 2?')
-            player2 = await client.wait_for_message(timeout=20.0, author=message.author)
-            final = random.randint(1, number)
-            int(final)
-            if final == 1:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked')
+            for name in names:
+                if names.index(name) == chosen_player_index:
+                    await client.send_message(name.mentions[0], 'It worked!')
                 
-                message = await client.wait_for_message(timeout=20.0, author=message.author)
-
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, player1.content)
-
-            elif final == 2:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked')
-                
-                message = await client.wait_for_message(timeout=20.0, author=message.author)
-
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, player2.content)
-            else:
-                await client.send_message(message.channel, 'An error occured, obj_final incorrectly set')
-            
-        elif number == 3:
-            await client.send_message(message.channel, 'Who will be player 1?')
-            player1 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 2?')
-            player2 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 3?')
-            player3 = await client.wait_for_message(timeout=10.0, author=message.author)
-            final = random.randint(1, number)
-            int(final)
-            if final == 1:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-
-            elif final == 2:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-
-            elif final == 3:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-            
-            else :
-                await client.send_message(message.channel, 'An error occured, obj_final incorrectly set')
-
-        elif number == 4:
-            await client.send_message(message.channel, 'Who will be player 1?')
-            player1 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 2?')
-            player2 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 3?')
-            player3 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 4?')
-            player4 = await client.wait_for_message(timeout=10.0, author=message.author)
-            final = random.randint(1, number)
-            int(final)
-            
-            if final == 1:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-
-            elif final == 2:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-
-            elif final == 3:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-            
-            elif final == 4:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-            
-            else :
-                await client.send_message(message.channel, 'An error occured, obj_final incorrectly set')
-
+                else:
+                    await client.send_message(name.mentions[0], 'It worked!')
         
-        elif number == 5:
-            await client.send_message(message.channel, 'Who will be player 1?')
-            player1 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 2?')
-            player2 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 3?')
-            player3 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message.channel, 'Who will be player 4?')
-            player4 = await client.wait_for_message(timeout=10.0, author=message.author)
-            await client.send_message(message,channel, 'Who will be player 5?')
-            player5 = await client.wait_for_message(timeout=10.0, author=message.author)
-            final = random.randint(1, number)
-            int(final)
-            
-            if final == 1:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-                await client.send_message(player5.mentions[0], 'It worked!')
-                fake = player1
-                str (fake)
-                
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-                
-
-            elif final == 2:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-                await client.send_message(player5.mentions[0], 'It worked!')
-                fake = player2
-                str (fake)
-
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-                else :
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-            elif final == 3:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-                await client.send_message(player5.mentions[0], 'It worked!')
-                fake = player3
-                str (fake)
-
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-                else :
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-            
-            elif final == 4:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-                await client.send_message(player5.mentions[0], 'It worked!')
-                fake = player4
-                str (fake)
-
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-                else :
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-            elif final == 5:
-                await client.send_message(player1.mentions[0], 'It worked!')
-                await client.send_message(player2.mentions[0], 'It worked!')
-                await client.send_message(player3.mentions[0], 'It worked!')
-                await client.send_message(player4.mentions[0], 'It worked!')
-                await client.send_message(player5.mentions[0], 'It worked!')
-                fake = player5
-                str (fake)
-
-                if message.content.startswith('~answer'):
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-
-                else :
-                    await client.send_message(message.channel, 'The fake was: ', fake.content)
-            
-            else :
-                await client.send_message(message.channel, 'An error occured, obj_final incorrectly set')
-         
+                    if message.content.startswith('~answer'):
+                        fake = chosen_player_index
+                        str(fake)
+                        await client.send_message(message.channel, fake.content)
 #-----------------------------------------------------------------------------------------------------------------
     if message.content.startswith('~guess'):
         await client.send_message(message.channel, 'Guess a number between 1 to 10')
