@@ -6,10 +6,10 @@ import platform
 import random
 
 client = Bot(description="Bot by Sean", command_prefix="", pm_help = True)
-// This only works on my server// 
+
 @client.event
 async def on_member_join(member):
-    channel = client.get_channel("385413158975832074")
+    channel = client.get_channel("")
     server = member.server
     fmt = 'Welcome {0.mention} to {1.name}!'
     await client.send_message(channel, fmt.format(member, server))
@@ -35,7 +35,7 @@ async def on_message(message):
     if message.content.startswith('heck'):
         await client.send_message(message.channel, 'no')
 
-<<<<<<< HEAD
+
 #-------------------------------Guessing game------------------------------------------------------------------------
 =======
     if message.author == client.user:
@@ -72,7 +72,7 @@ async def on_message(message):
                         str(fake)
                         await client.send_message(message.channel, fake.content)
 #-----------------------------------------------------------------------------------------------------------------
->>>>>>> 39736269a0d278d2663332772839fd3a05c28dff
+
     if message.content.startswith('~guess'):
         await client.send_message(message.channel, 'Guess a number between 1 to 10')
 
@@ -136,7 +136,7 @@ async def on_ready():
 	print('------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
 	print('Use this link to invite {}:'.format(client.user.name))
 	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(client.user.id))
-<<<<<<< HEAD
+
 	print('------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
 =======
 	print('--------')
@@ -145,6 +145,5 @@ async def on_ready():
 
 
 client.run('')
->>>>>>> 39736269a0d278d2663332772839fd3a05c28dff
 
 client.run('')
